@@ -1,6 +1,6 @@
 {
   "name": "expo-myid",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "React native Expo my id wrapper",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -41,5 +41,10 @@
     "expo": "*",
     "react": "*",
     "react-native": "*"
+  },
+  "expo": {
+    "autolinking": {
+      "searchPaths": ["./"]
+    }
   }
 }
