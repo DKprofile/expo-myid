@@ -1,37 +1,39 @@
-import { useEvent } from 'expo';
-import ExpoMyid, { ExpoMyidView } from 'expo-myid';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import ExpoMyid, {useMyIdEvent} from 'expo-myid';
+import {Button, SafeAreaView, ScrollView, Text, View} from 'react-native';
+
+const client_id = 'sample_client_id';
+const clientHashId = 'sample_client_hash_id';
+const mode: "DEBUG"|"PRODUCTION" = 'DEBUG';
+const clientHash = `sample_client_hash`;
+const language = 'ru';
 
 export default function App() {
-  const onChangePayload = useEvent(ExpoMyid, 'onChange');
+  const payload = useMyIdEvent();
+
+  console.log(payload)
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
         <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{ExpoMyid.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{ExpoMyid.hello()}</Text>
-        </Group>
         <Group name="Async functions">
           <Button
-            title="Set value"
+            title="Myid"
             onPress={async () => {
-              await ExpoMyid.setValueAsync('Hello from JS!');
+              ExpoMyid.myid_login({
+                clientHashId: clientHashId,
+                clientId: client_id,
+                clientHash: clientHash,
+                mode: mode,
+                locale: language
+              })
             }}
           />
         </Group>
         <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <ExpoMyidView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
+          <Text>Status: {payload?.status}</Text>
+          <Text>Error: {payload?.error}</Text>
+          <Text>Code: {payload?.code}</Text>
         </Group>
       </ScrollView>
     </SafeAreaView>

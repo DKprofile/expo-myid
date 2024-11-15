@@ -41,3 +41,10 @@ android {
     abortOnError false
   }
 }
+
+dependencies {
+  implementation("uz.myid.sdk.capture:myid-capture-sdk-bundled:2.3.6")
+  implementation 'androidx.appcompat:appcompat:1.7.0'
+}
+
+

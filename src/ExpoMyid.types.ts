@@ -1,19 +1,13 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-export type OnLoadEventPayload = {
-  url: string;
-};
+
 
 export type ExpoMyidModuleEvents = {
-  onChange: (params: ChangeEventPayload) => void;
+  onMyid: (params: onMyidPayload) => void;
 };
 
-export type ChangeEventPayload = {
-  value: string;
-};
-
-export type ExpoMyidViewProps = {
-  url: string;
-  onLoad: (event: { nativeEvent: OnLoadEventPayload }) => void;
-  style?: StyleProp<ViewStyle>;
+export type onMyidPayload = {
+  code: string;
+  error: string;
+  status: "success"|"error"
 };

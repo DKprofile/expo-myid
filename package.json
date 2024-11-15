@@ -28,7 +28,9 @@
   "author": "DVK <dvk@fotrum.com> ()",
   "license": "MIT",
   "homepage": "https://github.com/DKprofile/expo-myid#readme",
-  "dependencies": {},
+  "dependencies": {
+    "expo-build-properties": "~0.13.1"
+  },
   "devDependencies": {
     "@types/react": "~18.3.12",
     "expo-module-scripts": "^4.0.2",
