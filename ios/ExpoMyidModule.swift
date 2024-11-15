@@ -19,6 +19,8 @@ struct MyIdProps : Record {
 }
 
 public class ExpoMyidModule: Module {
+    
+    
     // Each module class must implement the definition function. The definition consists of components
     // that describes the module's functionality and behavior.
     // See https://docs.expo.dev/modules/module-api for more details about available components.
@@ -34,6 +36,10 @@ public class ExpoMyidModule: Module {
         // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
         AsyncFunction("myid_login") { (data: MyIdProps) in
             DispatchQueue.main.async {
+                let delegate = ExpoMyidClientDelegate(sendEvent: { eventName, data in
+                    super.sendEvent(eventName, data)
+                });
+                
                 let client_id = data.clientId;
                 let clientHashId = data.clientHashId;
                 let clientHash = data.clientHash;
@@ -57,14 +63,21 @@ public class ExpoMyidModule: Module {
                 config.clientHashId = clientHashId;
                 config.buildMode = buildMode;
                 config.locale = locale;
-                MyIdClient.start(withConfig: config, withDelegate: self);
+                MyIdClient.start(withConfig: config, withDelegate: delegate);
             }
         }
     }
 }
 
 
-extension ExpoMyidModule: MyIdClientDelegate {
+class ExpoMyidClientDelegate: MyIdClientDelegate {
+    var sendEvent: (String, [String: Any?]) -> Void;
+    
+    init(sendEvent: @escaping (String, [String: Any?]) -> Void) {
+        self.sendEvent = sendEvent
+    }
+    
+    
     public func onSuccess(result: MyIdResult) {
         if let code = result.code {
             print(code)
