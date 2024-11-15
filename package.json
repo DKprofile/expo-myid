@@ -1,7 +1,7 @@
 {
   "name": "expo-myid",
-  "version": "0.1.0",
-  "description": "My new module",
+  "version": "0.1.1",
+  "description": "React native Expo my id wrapper",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
