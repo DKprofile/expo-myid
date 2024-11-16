@@ -1,4 +1,4 @@
-import ExpoMyid, {useMyIdEvent} from 'expo-myid';
+import { MyId, useMyIdEvent } from 'expo-myid';
 import {Button, SafeAreaView, ScrollView, Text, View} from 'react-native';
 
 const client_id = 'sample_client_id';
@@ -20,7 +20,7 @@ export default function App() {
           <Button
             title="Myid"
             onPress={async () => {
-              ExpoMyid.myid_login({
+              MyId.myid_login({
                 clientHashId: clientHashId,
                 clientId: client_id,
                 clientHash: clientHash,
