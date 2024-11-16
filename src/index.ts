@@ -2,9 +2,28 @@
 // and on native platforms to ExpoMyidModule.ts
 
 
-import ExpoMyid from "./ExpoMyidModule";
-import {useEvent} from "expo";
+
+import {useEffect, useState} from "react";
+import {onMyidPayload} from "./ExpoMyid.types";
+import ExpoMyidModule from "./ExpoMyidModule";
 
 export {default} from './ExpoMyidModule';
 export * from './ExpoMyid.types';
-export const useMyIdEvent = () => useEvent(ExpoMyid, 'onMyid');
+// export const useMyIdEvent = () => useEvent(ExpoMyid, 'onMyid');
+
+
+export const useMyIdEvent = () => {
+  const [state, setState] = useState<onMyidPayload|null>(null);
+
+  useEffect(() => {
+    const subscription = ExpoMyidModule.addListener("onMyid", (payload) => {
+      setState(payload);
+    })
+
+    return () => {
+      subscription.remove();
+    }
+  }, []);
+
+  return state;
+}
