@@ -10,4 +10,5 @@ export type onMyidPayload = {
   code: string;
   error: string;
   status: "success"|"error"
+  error_code: string;
 };

@@ -67,7 +67,9 @@ export default function App() {
         <Group name="Events">
           <Text>Status: {payload?.status}</Text>
           <Text>Error: {payload?.error}</Text>
+          <Text>Error Code: {payload?.error_code}</Text>
           <Text>Code: {payload?.code}</Text>
+          
         </Group>
       </ScrollView>
     </SafeAreaView>
@@ -104,6 +106,7 @@ export type onMyidPayload = {
   code: string;
   error: string;
   status: "success"|"error"
+  error_code: string;
 };
 
 ```

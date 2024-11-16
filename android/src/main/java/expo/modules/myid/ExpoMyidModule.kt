@@ -83,7 +83,8 @@ class ExpoMyidModule : Module(), MyIdResultListener,
             "onMyid", mapOf(
                 "code" to "",
                 "status" to "error",
-                "error" to exception.message
+                "error" to exception.message,
+                "error_code" to exception.code.toString()
             )
         )
     }
@@ -93,7 +94,8 @@ class ExpoMyidModule : Module(), MyIdResultListener,
             "onMyid", mapOf(
                 "code" to result.code,
                 "status" to "success",
-                "error" to ""
+                "error" to "",
+                "error_code" to ""
             )
         )
     }

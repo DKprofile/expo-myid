@@ -82,13 +82,13 @@ class ExpoMyidClientDelegate: MyIdClientDelegate {
         if let code = result.code {
             print(code)
             
-            self.sendEvent("onMyid", ["code": result.code, "status": "success", "error": ""])
+            self.sendEvent("onMyid", ["code": result.code, "status": "success", "error": "", "error_code": ""])
         }
         
     }
     
     public func onError(exception: MyIdException) {
-        self.sendEvent("onMyid", ["code": "", "status": "error", "error": exception.message])
+        self.sendEvent("onMyid", ["code": "", "status": "error", "error": exception.message, "error_code": exception.code])
     }
     
     public  func onUserExited() {
