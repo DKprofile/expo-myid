@@ -7,10 +7,12 @@ import {useEffect, useState} from "react";
 import {onMyidPayload} from "./ExpoMyid.types";
 import ExpoMyidModule from "./ExpoMyidModule";
 
-export {default} from './ExpoMyidModule';
+
 export * from './ExpoMyid.types';
 // export const useMyIdEvent = () => useEvent(ExpoMyid, 'onMyid');
 
+
+export const MyId = ExpoMyidModule;
 
 export const useMyIdEvent = () => {
   const [state, setState] = useState<onMyidPayload|null>(null);
